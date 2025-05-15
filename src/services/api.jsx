@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-    baseURL: "http://localhost:3001/blog/v1/",
+    baseURL: "http://localhost:3001/blog/v1",
     timeout: 5000,
     headers: { "Cache-Control": "no-cache, no-store, must-revalidate" }
 });
@@ -16,3 +16,14 @@ export const addComments = async (data) => {
         }
     }
 }
+
+export const getCourses = async () => {
+    try {
+        return await apiClient.get('/course/viewCourses');
+    } catch (error) {
+        return {
+            error: true,
+            e: error
+        }
+    }
+};

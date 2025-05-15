@@ -2,7 +2,7 @@ import './App.css'
 import { useRoutes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import routes from "./routes.jsx"
-import { Provider } from "./components/ui/provider"
+import { ChakraProvider } from '@chakra-ui/react'
 
 function App() {
   
@@ -10,13 +10,13 @@ function App() {
 
   return (
     <>
-      <Provider>
-        {element}  
+    <ChakraProvider>
+      {element}  
         <Toaster  
-          position="bottonm-right"
+          position="bottom-right"
           reverseOrder = {false}
-        />  
-      </Provider>
+        />
+    </ChakraProvider>
     </>
   )
 }

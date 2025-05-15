@@ -2,7 +2,7 @@ import { CoursePage } from "./pages/dashboard"
 
 
 const routes = [
-    {path: '/coursePage', element: <PrivateRoute><CoursePage /></PrivateRoute>}
+    {path: '/*', element: <CoursePage />}
 ]
 
 export default routes

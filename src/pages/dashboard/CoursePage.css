@@ -1,0 +1,11 @@
+.card-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Espacio entre las tarjetas */
+    flex-wrap: wrap; /* Hace que se acomoden en varias líneas si no hay espacio */
+}
+
+.card {
+    max-width: 300px; /* O 'sm', si estás usando Chakra UI */
+    flex: 1 1 300px; /* Flexibilidad para responsive */
+}

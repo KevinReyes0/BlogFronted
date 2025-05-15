@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { saveComment as saveCommentRequest } from "../../../services";
+import { addComments as addCommentsRequest } from "../../../services";
 import toast from "react-hot-toast";
 
 export const useCommentForm = () => {
     const [ isLoading, setIsLoading ] = useState(false);
     const navigate = useNavigate();
 
-    const saveComment = async ( namePublication, nameUser, comment) => {
+    const addComments = async ( namePublication, nameUser, comment) => {
         setIsLoading(true)
 
-        const response = await saveCommentRequest({namePublication, nameUser, comment})
+        const response = await addCommentsRequest({namePublication, nameUser, comment})
 
         setIsLoading(false)
 
@@ -22,13 +22,15 @@ export const useCommentForm = () => {
             )
         }
 
-        toast.succes('Comentario agregado con exito')
+        toast.success('Comentario agregado con exito')
+
         navigate('/commmentPage', { replace : true});
+        
         window.location.reload();
     }
 
     return{
-        svaeClient,
+        addComments,
         isLoading
     }
 }
