@@ -7,7 +7,7 @@ export const useCommentForm = () => {
     const [ isLoading, setIsLoading ] = useState(false);
     const navigate = useNavigate();
 
-    const addComments = async ( namePublication, nameUser, comment) => {
+    const addComments = async ( namePublication, nameUser, comment ) => {
         setIsLoading(true)
 
         const response = await addCommentsRequest({namePublication, nameUser, comment})

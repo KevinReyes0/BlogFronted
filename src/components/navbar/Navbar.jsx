@@ -3,21 +3,19 @@
 import {
     Box,
     Flex,
-    Avatar,
-    Text,
     Button,
     Menu,
     MenuButton,
     MenuList,
-    MenuItem,
-    MenuDivider,
     useDisclosure,
     useColorModeValue,
     Stack,
     useColorMode,
-    Center,
+    Spacer
 } from '@chakra-ui/react';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+import { DragHandleIcon } from '@chakra-ui/icons';
+import { useNavigate } from "react-router-dom";
 
 const NavLink = ({ children }) => {
     return (
@@ -40,12 +38,13 @@ const NavLink = ({ children }) => {
 export default function Nav() {
     const { colorMode, toggleColorMode } = useColorMode();
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const navigate = useNavigate();
 
     return (
         <>
             <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
                 <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-                    <Box>Logo</Box>
+                    <Box>Blog</Box>
 
                     <Flex alignItems={'center'}>
                         <Stack direction={'row'} spacing={7}>
@@ -61,28 +60,38 @@ export default function Nav() {
                                     cursor={'pointer'}
                                     minW={0}
                                 >
-                                <Avatar
-                                    size={'sm'}
-                                    src={'https://api.dicebear.com/6.x/male/svg?seed=username'}
-                                />
+                                <Stack direction="row" spacing={4}>
+                                    <DragHandleIcon boxSize={8} />
+                                </Stack>
                                 </MenuButton>
+                                
                                 <MenuList alignItems={'center'}>
-                                    <br />
-                                    <Center>
-                                        <Avatar
-                                            size={'2xl'}
-                                            src={'https://api.dicebear.com/6.x/male/svg?seed=username'}
-                                        />
-                                    </Center>
-                                    <br />
-                                    <Center>
-                                        <Text>Username</Text>
-                                    </Center>
-                                    <br />
-                                    <MenuDivider />
-                                    <MenuItem>Your Servers</MenuItem>
-                                    <MenuItem>Account Settings</MenuItem>
-                                    <MenuItem>Logout</MenuItem>
+
+                                    <Flex minWidth='max-content' alignItems='center' gap='2'>
+                                        <Box p='2'>
+                                            <Button
+                                                colorScheme='blue' 
+                                                
+                                                onClick={() => navigate(`/*`)}
+                                            >
+                                                cursos
+                                            </Button>
+                                        </Box>
+                                        <Spacer />
+                                    </Flex>
+
+                                    <Flex minWidth='max-content' alignItems='center' gap='2'>
+                                        <Box p='2'>
+                                            <Button
+                                                colorScheme='blue' 
+                                                
+                                                onClick={() => navigate(`/allPublications`)}
+                                            >
+                                                Todas las publicaciones
+                                            </Button>
+                                        </Box>
+                                        <Spacer />
+                                    </Flex>
                                 </MenuList>
                             </Menu>
                         </Stack>

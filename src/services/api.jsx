@@ -6,16 +6,7 @@ const apiClient = axios.create({
     headers: { "Cache-Control": "no-cache, no-store, must-revalidate" }
 });
 
-export const addComments = async (data) => {
-    try {
-        return await apiClient.post('/comments/addComment', data);
-    } catch (e) {
-        return {
-            error: true,
-            e
-        }
-    }
-}
+
 
 export const getCourses = async () => {
     try {
@@ -25,5 +16,55 @@ export const getCourses = async () => {
             error: true,
             e: error
         }
+    }
+};
+
+export const getPublications = async () => {
+    try {
+        return await apiClient.get('/publications/viewPublications');
+    } catch (error) {
+        return {
+            error: true,
+            e: error
+        }
+        
+    }
+};
+
+export const addComments = async (data) => {
+    try {
+        return await apiClient.post('/comments/addComment', data);
+    } catch (error) {
+        return {
+            error: true,
+            e: error
+        }
+        
+    }
+};
+
+export const updateComments = async (id, data) => {
+    try {
+        return await apiClient.put(`/comments/updateComment/${id}`, data);
+    } catch (error) {
+        return {
+            error: true,
+            e: error
+        }
+        
+    }
+};
+
+export const deleteComments = async (id) => {
+    try {
+        return await apiClient.delete(`/comments/deleteComment/${id}`, {
+        data: { confirmation: true },
+    });
+    } catch (error) {
+        return {
+            error: true,
+            e: error
+        }
+        
     }
 };

@@ -1,110 +1,50 @@
 import { useCoursesView } from "../../shared/hooks/courses/useCoursesView.jsx";
-import { Card, CardHeader, CardBody, CardFooter, Stack , Heading , Divider , ButtonGroup , Button, Image, Text  } from '@chakra-ui/react'
+import { Card, CardBody, CardFooter, Stack , Heading, ButtonGroup, Button, Image, Text, Container  } from '@chakra-ui/react'
+import { useNavigate } from "react-router-dom";
 
 export const CoursesPage = () => {
     const { courses, loading, fetchCourses } = useCoursesView();
+    const navigate = useNavigate();
 
+    const courseImages = {
+    "6823fa6d5100ca27839c92b3": "https://images.vexels.com/media/users/3/331160/isolated/preview/cd3af79afac0b6e745fc1f84338b6a2c-icono-de-una-llave-inglesa-en-la-pantalla-de-una-computadora.png",
+    "6823fa6d5100ca27839c92b1": "https://images.vexels.com/media/users/3/331157/isolated/preview/4cbee01007ffb957e6bf876a76d8b002-pantalla-de-computadora-con-icono-de-codigo.png",
+    "6823fa6d5100ca27839c92b5": "https://images.vexels.com/media/users/3/331160/isolated/preview/cd3af79afac0b6e745fc1f84338b6a2c-icono-de-una-llave-inglesa-en-la-pantalla-de-una-computadora.png",
+    };
+
+    if (loading) return <p>Cargando cursos...</p>;
     return (
         <>
-            <div className="card-container">
-                <Card className="card" maxW='sm'>
-                    <CardBody>
-                        <Image
-                            src='https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
-                            alt='Green double couch with wooden legs'
-                            borderRadius='lg'
-                        />
-                        <Stack mt='6' spacing='3'>
-                            <Heading size='md'>Living room Sofa</Heading>
-                            <Text>
-                                This sofa is perfect for modern tropical spaces, baroque inspired
-                                spaces, earthy toned spaces and for people who love a chic design with a
-                                sprinkle of vintage design.
-                            </Text>
-                            <Text color='blue.600' fontSize='2xl'>
-                                $450
-                            </Text>
-                        </Stack>
-                    </CardBody>
-                    <Divider />
-                    <CardFooter>
-                        <ButtonGroup spacing='2'>
-                                <Button variant='solid' colorScheme='blue'>
-                                    Buy now
-                                </Button>
-                                <Button variant='ghost' colorScheme='blue'>
-                                    Add to cart
-                                </Button>
-                        </ButtonGroup>
-                    </CardFooter>
-                </Card>
-
-                <Card className="card" maxW='sm'>
-                    <CardBody>
-                        <Image
-                            src='https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
-                            alt='Green double couch with wooden legs'
-                            borderRadius='lg'
-                        />
-                        <Stack mt='6' spacing='3'>
-                            <Heading size='md'>Living room Sofa</Heading>
-                            <Text>
-                                This sofa is perfect for modern tropical spaces, baroque inspired
-                                spaces, earthy toned spaces and for people who love a chic design with a
-                                sprinkle of vintage design.
-                            </Text>
-                            <Text color='blue.600' fontSize='2xl'>
-                                $450
-                            </Text>
-                        </Stack>
-                    </CardBody>
-                    <Divider />
-                    <CardFooter>
-                        <ButtonGroup spacing='2'>
-                                <Button variant='solid' colorScheme='blue'>
-                                    Buy now
-                                </Button>
-                                <Button variant='ghost' colorScheme='blue'>
-                                    Add to cart
-                                </Button>
-                        </ButtonGroup>
-                    </CardFooter>
-                </Card>
-
-                <Card className="card" maxW='sm'>
-                    <CardBody>
-                        <Image
-                            src='https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
-                            alt='Green double couch with wooden legs'
-                            borderRadius='lg'
-                        />
-                        <Stack mt='6' spacing='3'>
-                            <Heading size='md'>Living room Sofa</Heading>
-                            <Text>
-                                This sofa is perfect for modern tropical spaces, baroque inspired
-                                spaces, earthy toned spaces and for people who love a chic design with a
-                                sprinkle of vintage design.
-                            </Text>
-                            <Text color='blue.600' fontSize='2xl'>
-                                $450
-                            </Text>
-                        </Stack>
-                    </CardBody>
-                    <Divider />
-                    <CardFooter>
-                        <ButtonGroup spacing='2'>
-                                <Button variant='solid' colorScheme='blue'>
-                                    Buy now
-                                </Button>
-                                <Button variant='ghost' colorScheme='blue'>
-                                    Add to cart
-                                </Button>
-                        </ButtonGroup>
-                    </CardFooter>
-                </Card>
-            </div>
-
-            
+            < Container maxW='2x2'>
+                <div className="card-container">
+                    {courses.map((category) => (
+                        <Card className="card" key={category._id} maxW='sm'>
+                            <CardBody>
+                                <Image
+                                    src={courseImages[category._id] || 'https://via.placeholder.com/300x200?text=Sin+Imagen'}
+                                    alt={category.nameCategory}
+                                    borderRadius='lg'
+                                />
+                                <Stack mt='6' spacing='3'>
+                                    <Heading size='md'>{category.nameCategory}</Heading>
+                                    <Text>{category.descriptionCategory}</Text>
+                                </Stack>
+                            </CardBody>
+                            <CardFooter>
+                                <ButtonGroup spacing='2'>
+                                    <Button
+                                        variant='solid'
+                                        colorScheme='blue'
+                                        onClick={() => navigate(`/publications/${category._id}`)}
+                                    >
+                                        Ver publicaciones
+                                    </Button>
+                            </ButtonGroup>
+                            </CardFooter>
+                        </Card>
+                    ))}
+                </div>
+            </Container>
         </>
         
 
